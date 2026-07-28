@@ -1,0 +1,443 @@
+/* ============================================================
+   SVF — Services & Work page sections
+   Built on the homepage tokens (home.css) + shared chrome
+   (nav, .btn, .sec-label, .bigcta, .footer in sections.css).
+   ============================================================ */
+
+/* ---------- page hero (shared by Services + Work) ---------- */
+.page-hero {
+  position: relative;
+  background: var(--white);
+  padding: clamp(150px, 22vh, 270px) var(--gutter) clamp(64px, 9vh, 120px);
+  overflow: clip;
+}
+.page-hero .sec-label { margin-bottom: clamp(22px, 4vh, 44px); }
+.page-hero h1 {
+  position: relative;
+  z-index: 2;
+  font-size: clamp(46px, 7.6vw, 132px);
+  font-weight: 600;
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  max-width: 14ch;
+}
+.page-hero h1 .serif {
+  font-family: var(--font-display);
+  font-style: normal;
+  text-transform: uppercase;
+  color: var(--red);
+  font-weight: inherit;
+  font-size: 1em;
+}
+.ph-foot {
+  position: relative;
+  z-index: 2;
+  margin-top: clamp(30px, 5vh, 60px);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.ph-lead {
+  font-size: clamp(19px, 1.9vw, 30px);
+  line-height: 1.38;
+  max-width: 20em;
+  color: var(--ink-60);
+  text-wrap: pretty;
+}
+.ph-meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-35);
+  text-align: right;
+  line-height: 2;
+}
+.ph-ghost {
+  position: absolute;
+  right: -2%;
+  bottom: -6%;
+  z-index: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(180px, 34vw, 620px);
+  line-height: 0.7;
+  letter-spacing: -0.04em;
+  color: rgba(10, 10, 10, 0.04);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   SERVICES · four editorial categories, varied layouts
+   ============================================================ */
+.svc-cat {
+  position: relative;
+  border-top: 1px solid var(--hair);
+  padding: clamp(80px, 13vh, 170px) var(--gutter);
+  overflow: clip;
+}
+.cat-inner { max-width: 1500px; margin: 0 auto; }
+.cat-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  gap: clamp(36px, 6vw, 110px);
+  align-items: start;
+}
+.cat-head { position: sticky; top: clamp(96px, 13vh, 140px); }
+.cat-num {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(36px, 3.4vw, 60px);
+  color: var(--accent, var(--red));
+  line-height: 1;
+}
+.cat-name {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  padding-left: clamp(16px, 1.5vw, 28px);
+  font-family: var(--font-display);
+  font-size: clamp(34px, 4.6vw, 80px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  text-transform: uppercase;
+  color: var(--accent, var(--red));
+}
+.cat-name::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.08em;
+  bottom: 0.08em;
+  width: clamp(5px, 0.45vw, 8px);
+  background: var(--accent, var(--red));
+  border-radius: 999px;
+}
+.cat-name .serif { text-transform: none; color: var(--accent, var(--red)); font-weight: 400; }
+.cat-prop {
+  margin-top: clamp(20px, 3vh, 34px);
+  font-size: clamp(17px, 1.3vw, 21px);
+  line-height: 1.5;
+  max-width: 24em;
+  color: var(--ink-60);
+  text-wrap: pretty;
+}
+.cat-count {
+  margin-top: 22px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-35);
+}
+
+/* editorial list (Strategise / Produce) */
+.cat-list { list-style: none; margin: 0; padding: 0; }
+.cat-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 22px;
+  padding: clamp(16px, 2.4vh, 30px) 0;
+  border-bottom: 1px solid var(--hair);
+  font-size: clamp(24px, 3.2vw, 56px);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.04;
+  color: var(--ink);
+  transition: color 0.4s ease, text-shadow 0.4s ease;
+}
+.cat-list li:first-child { padding-top: 0; }
+.cat-list li .li-idx {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  color: var(--ink-35);
+  flex: none;
+  width: 2.4em;
+  transform: translateY(-0.3em);
+  transition: color 0.4s ease;
+}
+.cat-list li .li-arrow {
+  margin-left: auto;
+  color: var(--accent, var(--red));
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.cat-list li:hover {
+  color: var(--accent, var(--red));
+  text-shadow: 0 0 26px color-mix(in oklab, var(--accent, var(--red)) 55%, transparent),
+               0 0 6px color-mix(in oklab, var(--accent, var(--red)) 35%, transparent);
+}
+.cat-list li:hover .li-idx { color: var(--accent, var(--red)); }
+
+/* PRODUCE — bigger, reversed, ghost number behind */
+.svc-cat--produce { background: var(--cream); }
+.svc-cat--produce .cat-grid { grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr); }
+.svc-cat--produce .cat-head { order: 2; }
+.svc-cat--produce .cat-body { order: 1; }
+.svc-cat--produce .cat-list li { font-size: clamp(26px, 3.6vw, 64px); }
+.cat-ghost {
+  position: absolute;
+  left: -1%;
+  bottom: -8%;
+  z-index: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(220px, 40vw, 720px);
+  line-height: 0.7;
+  color: rgba(10, 10, 10, 0.035);
+  pointer-events: none;
+  user-select: none;
+}
+.svc-cat--produce .cat-inner,
+.svc-cat--strategise .cat-inner { position: relative; z-index: 1; }
+
+/* SCALE — asymmetric chip cloud */
+.svc-cat--scale .cat-grid { grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr); }
+.chip-cloud { display: flex; flex-wrap: wrap; gap: clamp(10px, 1vw, 16px); }
+.chip-cloud .chip {
+  font-size: clamp(16px, 1.5vw, 24px);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  padding: clamp(12px, 1.1vw, 18px) clamp(18px, 1.6vw, 28px);
+  border: 1px solid var(--hair);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--ink);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), background 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+}
+.chip-cloud .chip:nth-child(2n) { transform: translateY(10px); }
+.chip-cloud .chip:nth-child(3n) { transform: translateY(-8px); }
+.chip-cloud .chip:hover {
+  background: var(--accent, var(--red));
+  color: #fff;
+  border-color: transparent;
+  transform: translateY(-6px) scale(1.04);
+}
+
+/* BEYOND THE BRIEF — dark, experimental */
+.svc-cat--beyond {
+  background: var(--ink);
+  color: var(--cream);
+  border-top-color: transparent;
+}
+.svc-cat--beyond .sec-label { color: rgba(255, 255, 255, 0.6); }
+.svc-cat--beyond .sec-label::before { background: var(--yellow); }
+.svc-cat--beyond .cat-num { color: var(--yellow); }
+.svc-cat--beyond .cat-name { color: #fff; }
+.svc-cat--beyond .cat-name .serif { color: var(--yellow); }
+.svc-cat--beyond .cat-prop { color: rgba(255, 255, 255, 0.65); }
+.svc-cat--beyond .cat-count { color: rgba(255, 255, 255, 0.4); }
+.beyond-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(14px, 1.4vw, 22px);
+}
+.beyond-card {
+  position: relative;
+  padding: clamp(26px, 2.4vw, 40px);
+  min-height: clamp(150px, 14vw, 210px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.02);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: clip;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.5s ease, background 0.5s ease;
+}
+.beyond-card .bc-no {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.4);
+}
+.beyond-card .bc-name {
+  font-size: clamp(26px, 2.6vw, 44px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.beyond-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 130% at 90% 110%, rgba(244, 196, 48, 0.16), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.beyond-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(244, 196, 48, 0.5);
+  background: rgba(255, 255, 255, 0.04);
+}
+.beyond-card:hover::after { opacity: 1; }
+
+@media (max-width: 900px) {
+  .cat-grid,
+  .svc-cat--produce .cat-grid,
+  .svc-cat--scale .cat-grid { grid-template-columns: 1fr; gap: clamp(28px, 5vh, 48px); }
+  .cat-head { position: static; }
+  .svc-cat--produce .cat-head { order: 0; }
+  .svc-cat--produce .cat-body { order: 1; }
+  .beyond-grid { grid-template-columns: 1fr; }
+  .ph-ghost { display: none; }
+}
+
+/* ============================================================
+   WORK · film portfolio
+   ============================================================ */
+.work-films {
+  background: var(--white);
+  padding: clamp(50px, 7vh, 90px) var(--gutter) clamp(80px, 11vh, 140px);
+}
+.films-wrap { max-width: 1500px; margin: 0 auto; }
+.film {
+  display: grid;
+  gap: clamp(22px, 3vw, 56px);
+  margin-bottom: clamp(80px, 13vh, 180px);
+  align-items: center;
+}
+.film:last-child { margin-bottom: 0; }
+.film--full { grid-template-columns: 1fr; }
+.film--split { grid-template-columns: minmax(0, 1.32fr) minmax(0, 0.68fr); }
+.film--split.rev .film-media { order: 2; }
+.film--split.rev .film-meta { order: 1; }
+.film-media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  overflow: clip;
+  background: #0d0a0a;
+  box-shadow: 0 50px 130px -50px rgba(0, 0, 0, 0.6);
+}
+.film-media iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  pointer-events: none;
+  transform: scale(1.02);
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.film-media:hover iframe { transform: scale(1.07); }
+.film-media .f-rec {
+  position: absolute;
+  top: 16px; left: 18px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.85);
+}
+.film-media .f-rec i {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--red);
+  animation: pulse-dot 1.3s ease-in-out infinite;
+}
+.film-media .f-tc {
+  position: absolute;
+  top: 14px; right: 16px;
+  z-index: 2;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(0, 0, 0, 0.4);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+.film-idx {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(40px, 5vw, 88px);
+  color: var(--red);
+  line-height: 0.9;
+}
+.film--full .film-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  margin-top: clamp(18px, 2.4vh, 30px);
+  flex-wrap: wrap;
+}
+.film-client {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 12px;
+}
+.film-name {
+  font-size: clamp(30px, 4vw, 72px);
+  font-weight: 600;
+  line-height: 0.96;
+  letter-spacing: -0.03em;
+}
+.film-name .serif { font-weight: 400; color: var(--red); }
+.film-desc {
+  margin-top: 18px;
+  font-size: clamp(16px, 1.2vw, 19px);
+  line-height: 1.5;
+  color: var(--ink-60);
+  max-width: 26em;
+  text-wrap: pretty;
+}
+.film-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+.film-tags span {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: 1px solid var(--hair);
+  border-radius: 999px;
+  padding: 6px 13px;
+  color: var(--ink-60);
+}
+@media (max-width: 860px) {
+  .film--split, .film--split.rev { grid-template-columns: 1fr; }
+  .film--split.rev .film-media { order: 0; }
+  .film--split.rev .film-meta { order: 0; }
+}
+
+/* Testimonials (.kind / .kw-card) now live in sections.css so the
+   homepage and inner pages share one canonical treatment. */
+
+/* ============================================================
+   PHONE (≤900) — services rhythm + category title placement.
+   Desktop layout untouched.
+   ============================================================ */
+@media (max-width: 900px) {
+  /* tighten the airy desktop rhythm so phones don't feel empty */
+  .page-hero { padding: clamp(118px, 19vh, 172px) var(--gutter) clamp(34px, 5vh, 52px); }
+  .ph-foot { margin-top: clamp(22px, 4vh, 40px); gap: 20px; }
+  .svc-cat { padding: clamp(34px, 5.5vh, 54px) var(--gutter); }
+  .cat-grid,
+  .svc-cat--produce .cat-grid,
+  .svc-cat--scale .cat-grid { grid-template-columns: 1fr; gap: 18px; }
+  .cat-prop { margin-top: 10px; }
+  .cat-count { margin-top: 12px; }
+  /* category title leads at the TOP on phone, service list sits below it */
+  .cat-head { order: 0; margin: 0 0 clamp(18px, 3.2vh, 30px); position: static; }
+  .cat-body { order: 1; }
+  /* keep the big 01–04 ghost numbers visible on phone, tucked top-right behind the title */
+  .cat-ghost { display: block; left: auto; right: 3%; bottom: auto; top: -0.06em; font-size: clamp(78px, 26vw, 148px); color: rgba(10,10,10,0.055); }
+  .svc-cat--beyond .cat-ghost { color: rgba(255,255,255,0.06); }
+  /* the chip stagger offsets leave ragged gaps on a narrow column */
+  .chip-cloud .chip { transform: none !important; }
+  .beyond-card { min-height: 120px; }
+}

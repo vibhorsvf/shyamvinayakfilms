@@ -1,0 +1,16 @@
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.log
+.idea/
+.vscode/
+
+# Dependencies (none currently — static site, no build)
+node_modules/
+
+# Environment / secrets
+.env
+.env.*
+
+# Vercel CLI local state
+.vercel

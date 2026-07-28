@@ -1,0 +1,193 @@
+/* ============================================================
+   SVF — ABOUT US · editorial, organised, borderless
+   Shares the .page-hero title treatment with Services + Work.
+   No per-block dividers — rhythm comes from whitespace, the
+   split image rows and one full-bleed dark band. Inherits
+   tokens from home.css; .page-hero / .ph-* live in pages.css.
+   ============================================================ */
+
+.ab { background: var(--white); color: var(--ink); }
+.ab-wrap { max-width: 1180px; margin: 0 auto; padding: 0 var(--gutter); }
+.ab-narrow { max-width: 820px; }
+
+/* page-hero meta tweak (Mumbai · LA · Est.) */
+.ab .page-hero { padding-top: clamp(120px, 16vh, 200px); padding-bottom: clamp(40px, 5vh, 68px); }
+.ab .ph-foot { justify-content: flex-end; }
+.ab .ph-ghost { bottom: -10%; }
+
+/* shared body type (scoped to .ab-wrap so the shared red CTA keeps its own colours) */
+.ab-wrap p {
+  font-size: clamp(17px, 1.25vw, 20px);
+  line-height: 1.6;
+  color: var(--ink);
+  text-wrap: pretty;
+  margin: 0;
+}
+.ab-wrap p + p { margin-top: clamp(14px, 1.8vh, 20px); }
+.ab-wrap p.muted { color: var(--ink-60); }
+.ab b { font-weight: 600; }
+.ab-accent { color: var(--red); }
+
+/* big display emphasis line (re-used across zones) */
+.ab-lead {
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: clamp(26px, 3.4vw, 50px);
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-wrap: balance;
+  margin: 0;
+}
+.ab-lead .ab-accent { color: var(--red); }
+
+/* ---------- ORIGINS · numbered grid, no borders ---------- */
+.ab-origins {
+  padding: clamp(40px, 6vh, 88px) 0 clamp(40px, 6vh, 76px);
+}
+.ab-origins-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(22px, 3vw, 48px) clamp(40px, 6vw, 96px);
+}
+.ab-origin { display: flex; gap: 16px; align-items: baseline; }
+.ab-origin .oi {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  color: var(--red);
+  flex: none;
+  padding-top: 0.35em;
+}
+.ab-origin p { font-size: clamp(17px, 1.45vw, 22px); line-height: 1.45; }
+.ab-origins .ab-lead {
+  grid-column: 1 / -1;
+  margin-top: clamp(28px, 4vh, 52px);
+  max-width: 24em;
+}
+/* section opener line above the numbered grid */
+.ab-origins-intro {
+  font-size: clamp(34px, 4.6vw, 68px) !important;
+  max-width: 16em;
+  margin: 0 0 clamp(36px, 5vh, 64px) !important;
+}
+.ab-origins-intro .ab-accent { color: var(--red); }
+
+/* ---------- SPLIT image rows ---------- */
+.ab-split {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: clamp(36px, 5vw, 88px);
+  padding: clamp(44px, 6vh, 84px) 0;
+}
+.ab-split--rev .ab-split-img { order: -1; }
+.ab-split-copy > * + * { margin-top: clamp(16px, 2.2vh, 24px); }
+.ab-split-img { position: relative; }
+
+/* stat highlight chip (the "2024" moment) */
+.ab-stat {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: clamp(20px, 3vh, 32px);
+}
+.ab-stat .n {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(40px, 5vw, 76px);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  color: var(--red);
+}
+.ab-stat .l {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-60);
+  max-width: 14em;
+}
+
+.ab-frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: 12px;
+  overflow: clip;
+  background: #0e0e0e;
+}
+.ab-split--wide .ab-frame { aspect-ratio: 16 / 11; }
+.ab-frame image-slot { width: 100%; height: 100%; display: block; }
+
+/* quiet proud-moments list — markers, no borders */
+.ab-points { list-style: none; margin: clamp(8px,1.4vh,16px) 0 0; padding: 0; }
+.ab-points li {
+  position: relative;
+  padding-left: 26px;
+  margin-top: clamp(11px, 1.6vh, 15px);
+  font-size: clamp(16px, 1.15vw, 18px);
+  line-height: 1.5;
+  color: var(--ink-60);
+}
+.ab-points li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0.62em;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--red);
+}
+
+/* ---------- EARNING IT · full-bleed dark band ---------- */
+.ab-band {
+  background: var(--ink);
+  color: var(--cream);
+  padding: clamp(60px, 9vh, 112px) 0;
+}
+.ab-band .ab-wrap { max-width: 920px; }
+.ab-band p { color: rgba(255, 255, 255, 0.72); }
+.ab-band p b { color: #fff; font-weight: 600; }
+.ab-band .ab-lead { color: #fff; }
+.ab-band .ab-lead .ab-accent { color: var(--yellow); }
+.ab-band .ab-rule {
+  width: 48px; height: 2px;
+  background: var(--red);
+  margin: clamp(28px, 4vh, 44px) 0;
+  border: 0;
+}
+.ab-band .ab-cred { margin-top: clamp(28px, 4vh, 44px); }
+
+/* ---------- CLOSING · "still …" ---------- */
+.ab-end { padding: clamp(48px, 7vh, 96px) 0 clamp(48px, 8vh, 96px); }
+.ab-end-lines { display: flex; flex-direction: column; gap: clamp(2px, 0.5vh, 8px); }
+.ab-end-lines .el {
+  margin: 0;
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: clamp(34px, 5.4vw, 84px);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+}
+.ab-end-lines .el .ab-accent { color: var(--red); }
+.ab-end-lines .el.soft {
+  margin-top: clamp(20px, 3vh, 34px);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: clamp(17px, 1.5vw, 21px);
+  line-height: 1.55;
+  letter-spacing: 0;
+  color: var(--ink-60);
+  max-width: 36em;
+}
+
+.ab [data-fade] { will-change: transform, opacity; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 820px) {
+  .ab-origins-grid { grid-template-columns: 1fr; gap: 18px; }
+  .ab-origins { padding: clamp(30px,4vh,60px) 0 clamp(20px,3vh,34px); }
+  .ab-origins .ab-lead { margin-top: 22px; }
+  .ab-split { grid-template-columns: 1fr; gap: 28px; padding: clamp(30px,4.5vh,56px) 0; }
+  .ab-split--rev .ab-split-img { order: 0; }
+  .ab-frame { aspect-ratio: 16 / 11; }
+}

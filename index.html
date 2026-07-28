@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Shyam Vinayak Films · We make films brands actually want to share.</title>
+<meta name="description" content="Shyam Vinayak Films · Mumbai ad-film production house. Ad films, brand films, post-production, content for social." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
+<style>@font-face{font-family:'Clash Display';src:url('fonts/ClashDisplay-Regular.otf') format('opentype');font-weight:400;font-display:swap}@font-face{font-family:'Clash Display';src:url('fonts/ClashDisplay-Medium.otf') format('opentype');font-weight:500;font-display:swap}@font-face{font-family:'Clash Display';src:url('fonts/ClashDisplay-Semibold.otf') format('opentype');font-weight:600;font-display:swap}@font-face{font-family:'Clash Display';src:url('fonts/ClashDisplay-Bold.otf') format('opentype');font-weight:700;font-display:swap}</style>
+<link rel="stylesheet" href="home.css?v=8" />
+<link rel="stylesheet" href="sections.css?v=27" />
+<link rel="stylesheet" href="hero.css" />
+<link rel="stylesheet" href="billu-landing.css?v=36" />
+<meta name="ext-resource-dependency" content="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" />
+<meta name="ext-resource-dependency" content="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" />
+<meta name="ext-resource-dependency" content="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js" />
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#c1272d"/><text x="50" y="58" font-size="34" fill="#fff" text-anchor="middle" font-family="sans-serif" font-weight="700">SVF</text></svg></template>
+</head>
+<body>
+
+<!-- ============ BILLU — landing prelude (the opening scene, before the homepage) ============ -->
+<div id="billuLanding" role="dialog" aria-label="Welcome — meet Billu, the Chief Meowing Officer">
+  <video class="billu-vid" id="billuVid" loop muted playsinline preload="auto" aria-hidden="true">
+    <source src="uploads/billu-desktop.mp4" type="video/mp4" />
+  </video>
+  <div class="billu-vignette" aria-hidden="true"></div>
+
+  <div class="billu-loader" id="billuLoader" aria-live="polite">
+    <div class="bl-orbit"><span></span><span></span><span></span><svg class="bl-paw" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><ellipse cx="12" cy="16" rx="5" ry="4.2"/><ellipse cx="5.5" cy="10.5" rx="2.1" ry="2.7"/><ellipse cx="9.8" cy="7.4" rx="2.1" ry="2.8"/><ellipse cx="14.2" cy="7.4" rx="2.1" ry="2.8"/><ellipse cx="18.5" cy="10.5" rx="2.1" ry="2.7"/></svg></div>
+    <div class="bl-text">Fetching Billu in full quality…</div>
+    <div class="bl-bar"><span id="billuLoadFill"></span></div>
+  </div>
+
+  <div class="billu-bubble" id="billuBubble" role="status" aria-live="polite">
+    <div class="who"><svg class="paw" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><ellipse cx="12" cy="16" rx="5" ry="4.2"/><ellipse cx="5.5" cy="10.5" rx="2.1" ry="2.7"/><ellipse cx="9.8" cy="7.4" rx="2.1" ry="2.8"/><ellipse cx="14.2" cy="7.4" rx="2.1" ry="2.8"/><ellipse cx="18.5" cy="10.5" rx="2.1" ry="2.7"/></svg> Billu · CMO</div>
+    <span id="billuBubbleText"></span>
+    <div class="nudge" id="billuNudge"></div>
+    <span class="tail" aria-hidden="true"></span>
+  </div>
+
+  <button class="billu-skip" id="billuSkip" type="button">Skip intro <span aria-hidden="true">→</span></button>
+  <div class="billu-fade" id="billuFade"></div>
+</div>
+
+<div class="progress" aria-hidden="true"><div class="bar" id="progressBar"></div></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor" id="cursor" aria-hidden="true"><span class="cursor-label" id="cursorLabel"></span></div>
+
+<nav class="nav" id="nav" data-theme="dark" aria-label="Main">
+  <a class="nav-logo" href="index.html" aria-label="Shyam Vinayak Films — home"><span class="reel-dot"></span><img class="nav-logo-img" src="svf-logo.png" alt="Shyam Vinayak Films" /><span class="nav-logo-txt" aria-hidden="true">Shyam Vinayak<br />Films</span></a>
+  <div class="nav-links">
+    <a href="index.html" aria-current="page">Home</a>
+    <a href="services.html">Services</a>
+    <span class="nav-dd-wrap">
+      <a href="work.html" class="nav-dd-trigger">Work <span class="nav-dd-caret" aria-hidden="true">▾</span></a>
+      <div class="nav-dd-menu" role="menu">
+        <a href="work.html#films" role="menuitem">Films</a>
+        <a href="work.html#print" role="menuitem">Print</a>
+        <a href="work.html#branded" role="menuitem">Branded Content</a>
+      </div>
+    </span>
+    <a href="about.html">About Us</a>
+    <a class="nav-cta" href="mailto:vibhorsharma@shyamvinayakfilms.in">Let's talk</a>
+  </div>
+  <button class="nav-burger" id="navBurger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navMobile"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-mobile" id="navMobile" aria-hidden="true">
+  <nav class="nm-inner" aria-label="Mobile menu">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="work.html">Work</a>
+    <a href="about.html">About Us</a>
+    <a class="nm-cta" href="mailto:vibhorsharma@shyamvinayakfilms.in">Let's talk</a>
+  </nav>
+</div>
+
+<div class="page-above">
+<main>
+
+  <!-- ============ INTRO — editorial welcome ============ -->
+  <section class="intro" data-screen-label="Intro" data-nav="dark">
+
+    <div class="intro-hero">
+      <div class="intro-copy">
+        <h2 class="intro-lead" id="introLead">Now that you're here,<br />let's make this <em>interesting.</em></h2>
+        <p class="intro-p"><span class="iln">Some people arrive with a <strong>brief.</strong></span><span class="iln">Some with a <strong>problem.</strong></span><span class="iln">Some because <strong>someone they trust</strong> told them to.</span></p>
+        <p class="intro-p-chair">Whatever brought you here,<br /><em>pull up a chair.</em></p>
+      </div>
+      <div class="intro-reel" id="introReel" aria-hidden="true">
+        <div class="ir-row">
+          <div class="ir-track ir-track--l">
+            <div class="ir-tile" style="--p1:#7a1f27; --p2:#1c0608;"><img src="https://vumbnail.com/1187606796.jpg" alt="" loading="lazy" /></div>
+            <div class="ir-tile" style="--p1:#1f4736; --p2:#06140d;"><img src="https://vumbnail.com/1197629322.jpg" alt="" loading="lazy" /></div>
+            <div class="ir-tile" style="--p1:#33291f; --p2:#0f0a05;"><img src="https://vumbnail.com/1187605841.jpg" alt="" loading="lazy" /></div>
+            <div class="ir-tile" style="--p1:#8a6410; --p2:#241804;"><img src="https://vumbnail.com/1187603972.jpg" alt="" loading="lazy" /></div>
+            <div class="ir-tile" style="--p1:#7a1f27; --p2:#1c0608;"><img src="https://vumbnail.com/1187606796.jpg" alt="" loading="lazy" /></div>
+            <div class="ir-tile" style="--p1:#1f4736; --p2:#06140d;"><img src="https://vumbnail.com/1197629322.jpg" alt="" loading="lazy" /></div>
+            <div class="ir-tile" style="--p1:#33291f; --p2:#0f0a05;"><img src="https://vumbnail.com/1187605841.jpg" alt="" loading="lazy" /></div>
+            <div class="ir-tile" style="--p1:#8a6410; --p2:#241804;"><img src="https://vumbnail.com/1187603972.jpg" alt="" loading="lazy" /></div>
+          </div>
+        </div>
+        <div class="ir-row">
+          <div class="ir-track ir-track--r">
+            <div class="ir-tile" style="--p1:#33291f; --p2:#0f0a05;"><img src="https://vumbnail.com/1187605841.jpg" alt="" loading="lazy" /></div>
+            <div class="ir-tile" style="--p1:#8a6410; --p2:#241804;"><img src="https://vumbnail.com/1187603972.jpg" alt="" loading="lazy" /></div>
+            <div class="ir-tile" style="--p1:#7a1f27; --p2:#1c0608;"><img src="https://vumbnail.com/1187606796.jpg" alt="" loading="lazy" /></div>
+            <div class="ir-tile" style="--p1:#1f4736; --p2:#06140d;"><img src="https://vumbnail.com/1197629322.jpg" alt="" loading="lazy" /></div>
+            <div class="ir-tile" style="--p1:#33291f; --p2:#0f0a05;"><img src="https://vumbnail.com/1187605841.jpg" alt="" loading="lazy" /></div>
+            <div class="ir-tile" style="--p1:#8a6410; --p2:#241804;"><img src="https://vumbnail.com/1187603972.jpg" alt="" loading="lazy" /></div>
+            <div class="ir-tile" style="--p1:#7a1f27; --p2:#1c0608;"><img src="https://vumbnail.com/1187606796.jpg" alt="" loading="lazy" /></div>
+            <div class="ir-tile" style="--p1:#1f4736; --p2:#06140d;"><img src="https://vumbnail.com/1197629322.jpg" alt="" loading="lazy" /></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="intro-marquee" aria-hidden="true">
+      <div class="marquee" data-marquee-speed="0.6">
+        <div class="marquee-chunk">
+          <span class="m-item">Ad Films</span>
+          <span class="m-item">Brand Films</span>
+          <span class="m-item">Post-Production</span>
+          <span class="m-item">Social Content</span>
+          <span class="m-item">Campaigns</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="intro-lower">
+    <div class="intro-roles-block" id="introRoles">
+      <p class="intro-roles-pre"><span class="prl" aria-hidden="true"></span>We're<span class="prl" aria-hidden="true"></span></p>
+      <h3 class="intro-roles">
+        <span class="ir-line ir-1"><em>Strategists.</em></span>
+        <span class="ir-line ir-2">Storytellers.</span>
+        <span class="ir-line ir-3"><em>Film Nerds.</em></span>
+      </h3>
+    </div>
+
+    <div class="intro-coda">
+      <p class="intro-mid">Somewhere between the campaign objective, the audience insight and the creative ambition is where you'll usually find us.</p>
+      <p class="intro-mid">From brand strategy and campaign thinking to films, content and campaigns, we make sure good ideas find their way into the world.</p>
+    </div>
+
+    <a class="intro-scroll" href="#numbers" data-lenis-scroll>
+      <span class="intro-scroll-cue">Scroll down</span>
+      <span class="intro-scroll-prom">It gets <em>better.</em></span>
+      <span class="intro-scroll-arr" aria-hidden="true">↓</span>
+    </a>
+    </div>
+  </section>
+
+  <!-- ============ NUMBERS ============ -->
+  <section class="numbers" id="numbers" data-screen-label="Numbers" data-nav="dark">
+    <div class="numbers-grid">
+      <div class="stat">
+        <div class="stat-num"><span data-count="150">0</span><span class="plus">+</span><span class="stat-dot"></span></div>
+        <p class="stat-cap">Videos delivered</p>
+      </div>
+      <div class="stat">
+        <div class="stat-num"><span data-count="30">0</span><span class="plus">+</span><span class="stat-dot"></span></div>
+        <p class="stat-cap">Brand clients</p>
+      </div>
+      <div class="stat">
+        <div class="stat-num"><span data-count="15">0</span><span class="plus">+</span><span class="stat-dot"></span></div>
+        <p class="stat-cap">Cities shot in</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CLIENTS — partners in creativity ============ -->
+  <section class="clients-sec" data-screen-label="Clients" data-nav="dark" aria-label="Partners in creativity">
+    <div class="clients-head">
+      <h2 class="clients-h">Partners in <span class="serif">Creativity</span></h2>
+    </div>
+
+    <div class="clients-strip" aria-hidden="true">
+      <div class="marquee" data-marquee-speed="1">
+        <div class="marquee-chunk">
+          <span class="m-item">Swiggy</span>
+          <span class="m-item">Axis Bank</span>
+          <span class="m-item">CoinDCX</span>
+          <span class="m-item">Prime Video</span>
+          <span class="m-item">Luminous</span>
+          <span class="m-item">Skydo</span>
+          <span class="m-item">Healing Pharma</span>
+          <span class="m-item">Star Cement</span>
+          <span class="m-item">Goel TMT</span>
+          <span class="m-item">Kohira</span>
+          <span class="m-item">Melooha</span>
+          <span class="m-item">Lokal App</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="client-wall">
+        <figure class="client-tile" tabindex="0">
+          <img class="ct-logo" src="client-logos/swiggy.png" alt="Swiggy logo" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="client-tile" tabindex="0">
+          <img class="ct-logo" src="client-logos/axis-bank.png" alt="Axis Bank logo" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="client-tile" tabindex="0">
+          <img class="ct-logo" src="client-logos/coindcx.png" alt="CoinDCX logo" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="client-tile" tabindex="0">
+          <img class="ct-logo" src="client-logos/prime-video.png" alt="Prime Video logo" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="client-tile" tabindex="0">
+          <img class="ct-logo" src="client-logos/luminous.png" alt="Luminous logo" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="client-tile" tabindex="0">
+          <img class="ct-logo" src="client-logos/skydo.png" alt="Skydo logo" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="client-tile" tabindex="0">
+          <img class="ct-logo" src="client-logos/healing-pharma.png" alt="Healing Pharma logo" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="client-tile" tabindex="0">
+          <img class="ct-logo" src="client-logos/star-cement.png" alt="Star Cement logo" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="client-tile" tabindex="0">
+          <img class="ct-logo" src="client-logos/goel-tmt.png" alt="Goel TMT logo" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="client-tile" tabindex="0">
+          <img class="ct-logo" src="client-logos/avinash.png" alt="Avinash logo" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="client-tile" tabindex="0">
+          <img class="ct-logo" src="client-logos/atria-power.png" alt="Atria Power logo" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="client-tile" tabindex="0">
+          <img class="ct-logo" src="client-logos/brikolite.png" alt="Brikolite logo" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="client-tile" tabindex="0">
+          <img class="ct-logo" src="client-logos/vastu.png" alt="Vastu Ghee logo" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="client-tile" tabindex="0">
+          <img class="ct-logo" src="client-logos/melooha.png" alt="Melooha logo" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="client-tile" tabindex="0">
+          <img class="ct-logo" src="client-logos/kohira.png" alt="Kohira logo" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="client-tile" tabindex="0">
+          <img class="ct-logo" src="client-logos/panaka.png" alt="Panaka logo" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="client-tile" tabindex="0">
+          <img class="ct-logo" src="client-logos/solares.png" alt="Solares logo" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="client-tile" tabindex="0">
+          <img class="ct-logo" src="client-logos/neta.png" alt="Neta logo" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="client-tile" tabindex="0">
+          <img class="ct-logo" src="client-logos/supernova.png" alt="Supernova logo" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="client-tile" tabindex="0">
+          <img class="ct-logo" src="client-logos/lokal-app.png" alt="Lokal App logo" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="client-tile" tabindex="0">
+          <img class="ct-logo" src="client-logos/divinetalk.png" alt="DivineTalk logo" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="client-tile" tabindex="0">
+          <img class="ct-logo" src="client-logos/phoenix-laundry.png" alt="Phoenix Laundry logo" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="client-tile" tabindex="0">
+          <img class="ct-logo" src="client-logos/amaze.png" alt="Amaze logo" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="client-tile" tabindex="0">
+          <img class="ct-logo" src="client-logos/15-buttons.png" alt="15 Buttons logo" loading="lazy" decoding="async" />
+        </figure>
+    </div>
+    <div class="client-marquee" aria-hidden="true">
+      <div class="marquee" data-marquee-speed="0.5"><div class="marquee-chunk"><span class="cm-item"><img src="client-logos/swiggy.png" alt="Swiggy logo" loading="lazy" decoding="async" /></span><span class="cm-item"><img src="client-logos/axis-bank.png" alt="Axis Bank logo" loading="lazy" decoding="async" /></span><span class="cm-item"><img src="client-logos/coindcx.png" alt="CoinDCX logo" loading="lazy" decoding="async" /></span><span class="cm-item"><img src="client-logos/prime-video.png" alt="Prime Video logo" loading="lazy" decoding="async" /></span><span class="cm-item"><img src="client-logos/luminous.png" alt="Luminous logo" loading="lazy" decoding="async" /></span><span class="cm-item"><img src="client-logos/skydo.png" alt="Skydo logo" loading="lazy" decoding="async" /></span><span class="cm-item"><img src="client-logos/healing-pharma.png" alt="Healing Pharma logo" loading="lazy" decoding="async" /></span><span class="cm-item"><img src="client-logos/star-cement.png" alt="Star Cement logo" loading="lazy" decoding="async" /></span><span class="cm-item"><img src="client-logos/goel-tmt.png" alt="Goel TMT logo" loading="lazy" decoding="async" /></span><span class="cm-item"><img src="client-logos/avinash.png" alt="Avinash logo" loading="lazy" decoding="async" /></span><span class="cm-item"><img src="client-logos/atria-power.png" alt="Atria Power logo" loading="lazy" decoding="async" /></span><span class="cm-item"><img src="client-logos/brikolite.png" alt="Brikolite logo" loading="lazy" decoding="async" /></span></div></div>
+      <div class="marquee" data-marquee-speed="-0.5"><div class="marquee-chunk"><span class="cm-item"><img src="client-logos/vastu.png" alt="Vastu Ghee logo" loading="lazy" decoding="async" /></span><span class="cm-item"><img src="client-logos/melooha.png" alt="Melooha logo" loading="lazy" decoding="async" /></span><span class="cm-item"><img src="client-logos/kohira.png" alt="Kohira logo" loading="lazy" decoding="async" /></span><span class="cm-item"><img src="client-logos/panaka.png" alt="Panaka logo" loading="lazy" decoding="async" /></span><span class="cm-item"><img src="client-logos/solares.png" alt="Solares logo" loading="lazy" decoding="async" /></span><span class="cm-item"><img src="client-logos/neta.png" alt="Neta logo" loading="lazy" decoding="async" /></span><span class="cm-item"><img src="client-logos/supernova.png" alt="Supernova logo" loading="lazy" decoding="async" /></span><span class="cm-item"><img src="client-logos/lokal-app.png" alt="Lokal App logo" loading="lazy" decoding="async" /></span><span class="cm-item"><img src="client-logos/divinetalk.png" alt="DivineTalk logo" loading="lazy" decoding="async" /></span><span class="cm-item"><img src="client-logos/phoenix-laundry.png" alt="Phoenix Laundry logo" loading="lazy" decoding="async" /></span><span class="cm-item"><img src="client-logos/amaze.png" alt="Amaze logo" loading="lazy" decoding="async" /></span><span class="cm-item"><img src="client-logos/15-buttons.png" alt="15 Buttons logo" loading="lazy" decoding="async" /></span></div></div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICES — stuff we're good at ============ -->
+  <section class="services" data-screen-label="Services" data-nav="dark">
+    <div class="services-intro">
+      <h2>Stuff we're <br class="mb-br" /><span class="serif">good at</span></h2>
+    </div>
+
+    <div class="svc-grid">
+      <article class="svc-tile" style="--svc:var(--red);">
+        <div class="svc-tile-top">
+          <span class="svc-num">01</span>
+          <span class="svc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.4"/><path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3"/></svg></span>
+        </div>
+        <h3 class="svc-tile-name">Strategise</h3>
+        <ul class="svc-subs">
+          <li>Campaign Development</li>
+          <li>Creative Concepts</li>
+          <li>Brand Narratives</li>
+          <li>Scriptwriting</li>
+          <li>Creative Consultancy</li>
+        </ul>
+      </article>
+
+      <article class="svc-tile" style="--svc:var(--red);">
+        <div class="svc-tile-top">
+          <span class="svc-num">02</span>
+          <span class="svc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5h18v11a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 19.5z"/><path d="M3 8.5 5 3l4.2 1.4L7.2 9.9M9.2 4.4 13.4 5.8 11.4 11.3M13.4 5.8l4.2 1.4-2 5.5"/><path d="m10.5 13 4 2.4-4 2.4z"/></svg></span>
+        </div>
+        <h3 class="svc-tile-name">Produce</h3>
+        <ul class="svc-subs">
+          <li>TVCs</li>
+          <li>Digital Films</li>
+          <li>Corporate Films</li>
+          <li>Branded Content</li>
+          <li>Event Films</li>
+          <li>Print Campaigns</li>
+          <li>Product Films &amp; Photography</li>
+        </ul>
+      </article>
+
+      <article class="svc-tile" style="--svc:var(--red);">
+        <div class="svc-tile-top">
+          <span class="svc-num">03</span>
+          <span class="svc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><rect x="4.5" y="13" width="3.6" height="6"/><rect x="10.2" y="9" width="3.6" height="10"/><rect x="15.9" y="4.5" width="3.6" height="14.5"/></svg></span>
+        </div>
+        <h3 class="svc-tile-name">Scale</h3>
+        <ul class="svc-subs">
+          <li>UGC Content</li>
+          <li>Social Content</li>
+          <li>Creator Content</li>
+          <li>Meta Ad Creatives</li>
+          <li>Performance Marketing Assets</li>
+          <li>Campaign Adaptations</li>
+          <li>Content Retainers</li>
+          <li>Employer Branding Content</li>
+        </ul>
+      </article>
+
+      <article class="svc-tile" style="--svc:var(--red);">
+        <div class="svc-tile-top">
+          <span class="svc-num">04</span>
+          <span class="svc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5c.6 4.8 1.9 6.1 6.7 6.7-4.8.6-6.1 1.9-6.7 6.7-.6-4.8-1.9-6.1-6.7-6.7 4.8-.6 6.1-1.9 6.7-6.7Z"/><path d="M18.5 15.5c.3 2.1.8 2.6 2.9 2.9-2.1.3-2.6.8-2.9 2.9-.3-2.1-.8-2.6-2.9-2.9 2.1-.3 2.6-.8 2.9-2.9Z"/></svg></span>
+        </div>
+        <h3 class="svc-tile-name">Beyond the Brief</h3>
+        <ul class="svc-subs">
+          <li>AI Films</li>
+          <li>Animation</li>
+          <li>Motion Graphics</li>
+          <li>Explainer Videos</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ SELECTED WORK — pinned reel (Vimeo) ============ -->
+  <section class="workshow" id="workshow" data-screen-label="Selected work" data-nav="light">
+    <div class="ws-pin" id="wsPin">
+      <div class="ws-head">
+        <h2 class="ws-title">Featured <span class="serif">work</span></h2>
+      </div>
+
+      <div class="ws-stage" id="wsStage">
+        <article class="ws-item" data-ws>
+          <a class="ws-media" href="project.html" data-cursor="play" style="--p1:#7a1f27; --p2:#1c0608;">
+            <span class="ws-poster" aria-hidden="true"><span class="wsp-t serif">01</span><span class="wsp-m">SHYAM VINAYAK FILMS · SELECTED WORK</span></span>
+            <iframe class="ws-video" src="https://player.vimeo.com/video/1187606796?background=1&autoplay=1&loop=1&muted=1&autopause=0&dnt=1" allow="autoplay; fullscreen" tabindex="-1" title="Selected film 01" loading="lazy"></iframe>
+            <span class="ws-rec"><i></i>REC</span>
+            <span class="ws-tc">TC 00:00:00:00</span>
+          </a>
+          <div class="ws-info">
+            <div>
+              <p class="ws-client">Shyam Vinayak Films</p>
+              <h3 class="ws-name">The Long Drive <span class="serif">Home</span></h3>
+            </div>
+            <div class="ws-tags"><span>Ad film</span></div>
+          </div>
+        </article>
+        <article class="ws-item" data-ws>
+          <a class="ws-media" href="project.html" data-cursor="play" style="--p1:#33291f; --p2:#0f0a05;">
+            <span class="ws-poster" aria-hidden="true"><span class="wsp-t serif">02</span><span class="wsp-m">SHYAM VINAYAK FILMS · SELECTED WORK</span></span>
+            <iframe class="ws-video" src="https://player.vimeo.com/video/1197629322?background=1&autoplay=1&loop=1&muted=1&autopause=0&dnt=1" allow="autoplay; fullscreen" tabindex="-1" title="Selected film 02" loading="lazy"></iframe>
+            <span class="ws-rec"><i></i>REC</span>
+            <span class="ws-tc">TC 00:00:00:00</span>
+          </a>
+          <div class="ws-info">
+            <div>
+              <p class="ws-client">Shyam Vinayak Films</p>
+              <h3 class="ws-name">Quiet <span class="serif">Confidence</span></h3>
+            </div>
+            <div class="ws-tags"><span>Brand film</span></div>
+          </div>
+        </article>
+        <article class="ws-item" data-ws>
+          <a class="ws-media" href="project.html" data-cursor="play" style="--p1:#1f4736; --p2:#06140d;">
+            <span class="ws-poster" aria-hidden="true"><span class="wsp-t serif">03</span><span class="wsp-m">SHYAM VINAYAK FILMS · SELECTED WORK</span></span>
+            <iframe class="ws-video" src="https://player.vimeo.com/video/1187605841?background=1&autoplay=1&loop=1&muted=1&autopause=0&dnt=1" allow="autoplay; fullscreen" tabindex="-1" title="Selected film 03" loading="lazy"></iframe>
+            <span class="ws-rec"><i></i>REC</span>
+            <span class="ws-tc">TC 00:00:00:00</span>
+          </a>
+          <div class="ws-info">
+            <div>
+              <p class="ws-client">Shyam Vinayak Films</p>
+              <h3 class="ws-name">Feed <span class="serif">Native</span></h3>
+            </div>
+            <div class="ws-tags"><span>Social</span></div>
+          </div>
+        </article>
+        <article class="ws-item" data-ws>
+          <a class="ws-media" href="project.html" data-cursor="play" style="--p1:#8a6410; --p2:#241804;">
+            <span class="ws-poster" aria-hidden="true"><span class="wsp-t serif">04</span><span class="wsp-m">SHYAM VINAYAK FILMS · SELECTED WORK</span></span>
+            <iframe class="ws-video" src="https://player.vimeo.com/video/1187603972?background=1&autoplay=1&loop=1&muted=1&autopause=0&dnt=1" allow="autoplay; fullscreen" tabindex="-1" title="Selected film 04" loading="lazy"></iframe>
+            <span class="ws-rec"><i></i>REC</span>
+            <span class="ws-tc">TC 00:00:00:00</span>
+          </a>
+          <div class="ws-info">
+            <div>
+              <p class="ws-client">Shyam Vinayak Films</p>
+              <h3 class="ws-name">After <span class="serif">Hours</span></h3>
+            </div>
+            <div class="ws-tags"><span>Post & grade</span></div>
+          </div>
+        </article>
+      </div>
+
+      <a class="ws-more" href="work.html" data-cursor="hide">View more <span aria-hidden="true">→</span></a>
+
+      <div class="ws-final" id="wsFinal">
+        <p class="ws-final-n">150+ <span style="font-size:.4em;">films</span></p>
+        <a class="btn btn-fill" href="work.html" data-cursor="hide">See all work <span aria-hidden="true">→</span></a>
+      </div>
+
+      <div class="ws-progress" id="wsProgress" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIALS — a few kind words ============ -->
+  <section class="quotes" data-screen-label="Testimonials" data-nav="light">
+    <div class="quotes-inner">
+      <div class="q-label">
+        <h2 class="q-title">A few kind <span class="serif">words</span></h2>
+      </div>
+
+      <div class="q-card" id="qCard">
+        <span class="q-quote-glyph" aria-hidden="true">&ldquo;</span>
+        <span class="q-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8.4" r="3.7"/><path d="M5.4 19.4c0-3.7 3-6.1 6.6-6.1s6.6 2.4 6.6 6.1" stroke-linecap="round"/></svg></span>
+        <div class="q-viewport">
+          <blockquote class="q-slide is-active" data-q>
+            <p class="q-text">The team&rsquo;s attention to detail, from scripting and production to editing, made sure every second of the final video was <em>perfect</em>.</p>
+            <footer class="q-who">Aayush Jhunjhunwala · Co-founder · 15 BUTTONS</footer>
+          </blockquote>
+          <blockquote class="q-slide" data-q>
+            <p class="q-text">Vibhor&rsquo;s creativity, professionalism, and attention to detail captured our brand&rsquo;s essence perfectly and <em>exceeded every expectation</em>.</p>
+            <footer class="q-who">Alex Solares · Founder · Solares Farm Coffee</footer>
+          </blockquote>
+          <blockquote class="q-slide" data-q>
+            <p class="q-text">Their professionalism, attention to detail, and creativity made the entire production process <em>seamless from start to finish</em>.</p>
+            <footer class="q-who">Zulfikar Dhanse · Founder · Phoenix Laundry</footer>
+          </blockquote>
+          <blockquote class="q-slide" data-q>
+            <p class="q-text">They brought our brand story to life with creativity and precision while going <em>above and beyond</em> the agreed deliverables.</p>
+            <footer class="q-who">Anil Kanojia · Head of Marketing · Healing Pharma India</footer>
+          </blockquote>
+        </div>
+
+        <div class="q-controls">
+          <button class="q-arrow" id="qPrev" type="button" aria-label="Previous testimonial"><span aria-hidden="true">←</span></button>
+          <span class="q-counter" id="qCounter">01 / 04</span>
+          <button class="q-arrow" id="qNext" type="button" aria-label="Next testimonial"><span aria-hidden="true">→</span></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT · so, what's next? ============ -->
+  <section class="bigcta" data-screen-label="Contact" data-nav="dark">
+    <div class="bigcta-frame">
+      <span class="bigcta-corner tl" aria-hidden="true"></span>
+      <span class="bigcta-corner tr" aria-hidden="true"></span>
+      <span class="bigcta-corner bl" aria-hidden="true"></span>
+      <span class="bigcta-corner br" aria-hidden="true"></span>
+      <span class="bigcta-side bigcta-side-l" aria-hidden="true"><span class="bigcta-side-dot"></span>Get in touch</span>
+      <span class="bigcta-side bigcta-side-r" aria-hidden="true">SVF · Established 2024</span>
+      <div class="bigcta-inner">
+        <span class="bigcta-eyebrow">Get in touch</span>
+        <h2 class="bigcta-h" id="ctaH">So,<br />what's <span class="serif">next?</span></h2>
+        <p class="bigcta-sub">Whether you have a brief, a problem, or just an idea scribbled somewhere, we'd love to hear about it.</p>
+        <a class="bigcta-mail" href="mailto:vibhorsharma@shyamvinayakfilms.in" data-cursor="hide">
+          <span class="bigcta-mail-label">Let's talk</span>
+          <span class="bigcta-mail-arr" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+</div><!-- /.page-above -->
+
+<!-- ============ S12 — FOOTER (static) ============ -->
+<footer class="footer" id="footer" data-screen-label="S12 Footer">
+  <div class="footer-marq" aria-hidden="true">
+    <div class="marquee" data-marquee-speed="0.5">
+      <div class="marquee-chunk">
+        <span class="m-item">That's a wrap</span>
+        <span class="m-item">Shyam Vinayak Films</span>
+        <span class="m-item">Jaipur</span>
+        <span class="m-item">Established 2024</span>
+        <span class="m-item">That's a wrap</span>
+        <span class="m-item">Shyam Vinayak Films</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-cols">
+    <div>
+      <h4>Studio</h4>
+      <p>Shyam Vinayak Films<br />Laxmi Shrushti<br />Goregaon West, Mumbai</p>
+    </div>
+    <div>
+      <h4>Quick links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="work.html">Work</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="mailto:vibhorsharma@shyamvinayakfilms.in">Let's talk</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Elsewhere</h4>
+      <ul>
+        <li><a href="https://vimeo.com/shyamvinayakfilms" target="_blank" rel="noopener">Vimeo</a></li>
+        <li><a href="https://instagram.com/shyamvinayakfilms" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://www.linkedin.com/company/shyamvinayakfilms" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="mailto:vibhorsharma@shyamvinayakfilms.in">vibhorsharma@shyamvinayakfilms.in</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-strip">
+    <span>© BHALCHANDRA CINEMATIC PRIVATE LIMITED 2026</span>
+    <button class="to-top" id="toTop">↑ Back to top</button>
+  </div>
+  <div class="footer-ghost" aria-hidden="true"><span id="footerGhost">SHYAM VINAYAK FILMS</span></div>
+</footer>
+
+<script>
+/* Motion is core to this site's experience. Some preview/OS environments
+   report prefers-reduced-motion:reduce, which the motion scripts treat as a
+   hard kill-switch (no Lenis, no reveals, no pinned Featured Work / Testimonials).
+   Neutralise ONLY the reduced-motion query so the site animates as designed;
+   every other media query (breakpoints, hover, pointer) is passed through
+   untouched. */
+(function () {
+  var mm = window.matchMedia.bind(window);
+  function forcedList(media, matches) {
+    return {
+      matches: matches, media: media, onchange: null,
+      addListener: function () {}, removeListener: function () {},
+      addEventListener: function () {}, removeEventListener: function () {},
+      dispatchEvent: function () { return false; }
+    };
+  }
+  window.matchMedia = function (q) {
+    if (typeof q === 'string' && /prefers-reduced-motion/.test(q)) {
+      /* motion is always allowed: a reduce query never matches, a no-preference
+         query always matches */
+      var motionOK = /no-preference/.test(q);
+      /* strip the motion clause; evaluate any remaining conditions (e.g.
+         min-width) natively so responsive breakpoints still work */
+      var rest = q
+        .replace(/(?:and\s+)?\(\s*prefers-reduced-motion\s*:\s*[a-z-]+\s*\)/gi, '')
+        .replace(/^\s*and\s+/i, '').replace(/\s+and\s*$/i, '').trim();
+      if (rest && rest !== '()') {
+        var restMatches = mm(rest).matches;
+        return forcedList(q, motionOK && restMatches);
+      }
+      return forcedList(q, motionOK);
+    }
+    return mm(q);
+  };
+})();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+<script src="image-slot.js"></script>
+<script src="home.js?v=13"></script>
+<script src="billu-landing.js?v=23"></script>
+
+
+</body>
+</html>

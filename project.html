@@ -1,0 +1,665 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Long Drive Home · Mahindra Thar Earth · Shyam Vinayak Films</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="shared.css" />
+<link rel="stylesheet" href="modal.css" />
+<style>
+  /* Project hero */
+  .proj-hero {
+    padding-top: 120px;
+    padding-bottom: 40px;
+  }
+  .proj-crumbs {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+  }
+  .proj-crumbs a { color: var(--ink-soft); text-decoration: none; }
+  .proj-crumbs a:hover { color: var(--red); }
+  .proj-crumbs span.sep::before { content: "→"; margin: 0 4px; color: var(--ink); }
+
+  .proj-meta-bar {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 24px;
+    padding: 20px 0;
+    border-top: 1px solid var(--hair);
+    border-bottom: 1px solid var(--hair);
+    margin-bottom: 32px;
+  }
+  @media (max-width: 720px) { .proj-meta-bar { grid-template-columns: 1fr 1fr; gap: 20px; } }
+  .proj-meta-bar div {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .proj-meta-bar strong {
+    display: block;
+    font-family: "Clash Display", sans-serif;
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 18px;
+    text-transform: none;
+    letter-spacing: 0;
+    margin-top: 4px;
+  }
+
+  .proj-title {
+    font-family: "Clash Display", sans-serif;
+    font-size: clamp(56px, 9vw, 140px);
+    font-weight: 600;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    margin: 0 0 40px;
+  }
+  .proj-title em { font-style: italic; color: var(--red); font-weight: 500; }
+  .proj-summary {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 80px;
+    padding-bottom: 40px;
+  }
+  @media (max-width: 900px) { .proj-summary { grid-template-columns: 1fr; gap: 32px; } }
+  .proj-summary .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+  .proj-summary p {
+    font-size: 22px;
+    line-height: 1.45;
+    color: var(--ink);
+    max-width: 600px;
+    margin: 0;
+  }
+  .proj-summary p em { color: var(--red); font-style: italic; }
+
+  /* Big player */
+  .player {
+    aspect-ratio: 16 / 9;
+    background: #0e0e0e;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 28px;
+    cursor: pointer;
+  }
+  .player::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 20px);
+  }
+  .player .rec {
+    position: absolute; top: 22px; left: 22px;
+    color: var(--red);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px; letter-spacing: 0.16em;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .player .rec .d {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--red); animation: pulse 1.6s infinite;
+  }
+  .player .tc {
+    position: absolute; top: 22px; right: 22px;
+    color: rgba(255,255,255,0.55);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px; letter-spacing: 0.1em;
+  }
+  .player .lbl {
+    position: absolute; bottom: 22px; left: 22px;
+    color: rgba(255,255,255,0.6);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+  }
+  .player .ratio {
+    position: absolute; bottom: 22px; right: 22px;
+    color: rgba(255,255,255,0.55);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+  }
+  .player .ring {
+    position: absolute; left: 50%; top: 50%;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    border: 1px dashed rgba(255,255,255,0.2);
+    transform: translate(-50%, -50%);
+    animation: spin 22s linear infinite;
+  }
+  .player .play-big {
+    position: absolute; left: 50%; top: 50%;
+    width: 130px; height: 130px;
+    border-radius: 50%;
+    background: var(--red);
+    display: flex; align-items: center; justify-content: center;
+    transform: translate(-50%, -50%);
+    transition: transform 0.3s ease;
+  }
+  .player:hover .play-big { transform: translate(-50%, -50%) scale(1.08); }
+  .player .play-big svg { width: 36px; height: 36px; margin-left: 5px; fill: #fff; }
+
+  .player-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 22px;
+    background: var(--ink);
+    color: #fff;
+    border-radius: 999px;
+    margin-bottom: 80px;
+  }
+  .player-controls .ctrl {
+    background: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 4px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.1em;
+  }
+  .player-controls .ctrl:hover { color: var(--yellow); }
+  .player-controls .scrub {
+    flex: 1; height: 3px; background: rgba(255,255,255,0.15); border-radius: 2px; position: relative;
+  }
+  .player-controls .scrub-fill {
+    position: absolute; left: 0; top: 0; bottom: 0;
+    background: var(--red);
+    border-radius: 2px;
+    width: 28%;
+  }
+  .player-controls .scrub-fill::after {
+    content: "";
+    position: absolute; right: -5px; top: 50%;
+    width: 10px; height: 10px;
+    background: var(--red);
+    border-radius: 50%;
+    transform: translateY(-50%);
+  }
+  .player-controls .t { font-family: "JetBrains Mono", monospace; font-size: 11px; color: rgba(255,255,255,0.6); }
+
+  /* Two-col layout */
+  .proj-cols {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 80px;
+    margin-bottom: 100px;
+  }
+  @media (max-width: 900px) { .proj-cols { grid-template-columns: 1fr; gap: 40px; } }
+
+  .proj-cols h2 {
+    font-family: "Clash Display", sans-serif;
+    font-size: clamp(32px, 4vw, 56px);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin: 0 0 24px;
+  }
+  .proj-cols h2 em { font-style: italic; color: var(--red); }
+  .proj-cols p { font-size: 18px; line-height: 1.7; margin: 0 0 18px; }
+  .proj-cols p em { color: var(--red); font-style: italic; }
+  .proj-cols .lift {
+    font-family: "Clash Display", sans-serif;
+    font-size: 28px;
+    line-height: 1.25;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    padding: 32px 0;
+    border-top: 1px solid var(--hair);
+    border-bottom: 1px solid var(--hair);
+    margin: 32px 0;
+  }
+  .proj-cols .lift::before { content: "“"; color: var(--red); margin-right: 6px; font-style: italic; }
+
+  .credits {
+    position: sticky;
+    top: 120px;
+    align-self: start;
+    background: var(--bg-alt);
+    border-radius: 12px;
+    padding: 32px;
+  }
+  .credits h4 {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 18px;
+    font-weight: 500;
+  }
+  .credits ul { list-style: none; padding: 0; margin: 0 0 28px; }
+  .credits li {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--hair);
+    font-size: 14px;
+  }
+  .credits li:last-child { border-bottom: none; }
+  .credits li span:first-child {
+    color: var(--ink-soft);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .credits li span:last-child {
+    font-weight: 500;
+  }
+  .credits .deliv {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--hair);
+  }
+  .credits .deliv .chip {
+    display: inline-block;
+    border: 1px solid var(--hair);
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin: 4px 4px 0 0;
+    font-size: 11px;
+    font-family: "JetBrains Mono", monospace;
+    letter-spacing: 0.06em;
+    background: #fff;
+  }
+
+  /* BTS gallery */
+  .bts {
+    background: var(--bg-alt);
+    padding: 100px 0;
+    margin-bottom: 0;
+  }
+  .bts-head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: end;
+    margin-bottom: 48px;
+  }
+  .bts-head h2 {
+    font-family: "Clash Display", sans-serif;
+    font-size: clamp(40px, 5.5vw, 80px);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    margin: 0;
+  }
+  .bts-head h2 em { font-style: italic; color: var(--red); }
+  .bts-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    grid-template-rows: repeat(2, 240px);
+    gap: 16px;
+  }
+  @media (max-width: 720px) {
+    .bts-grid { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 200px); }
+    .bts-grid .b1 { grid-column: span 2; }
+  }
+  .bts-grid .b {
+    position: relative;
+    background: #0e0e0e;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .bts-grid .b::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 14px);
+  }
+  .bts-grid .b1 { grid-row: span 2; }
+  .bts-grid .b .stamp {
+    position: absolute;
+    bottom: 14px; left: 14px;
+    color: rgba(255,255,255,0.55);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  .bts-grid .b .num {
+    position: absolute;
+    top: 14px; right: 14px;
+    color: var(--yellow);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px; letter-spacing: 0.14em;
+  }
+
+  /* Result strip */
+  .results-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--hair);
+    border-bottom: 1px solid var(--hair);
+    margin-top: 80px;
+  }
+  @media (max-width: 900px) { .results-strip { grid-template-columns: 1fr 1fr; } }
+  .results-strip .stat {
+    padding: 48px 28px;
+    border-right: 1px solid var(--hair);
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .results-strip .stat:last-child { border-right: none; }
+  @media (max-width: 900px) {
+    .results-strip .stat:nth-child(2) { border-right: none; }
+    .results-strip .stat:nth-child(1), .results-strip .stat:nth-child(2) { border-bottom: 1px solid var(--hair); }
+  }
+  .results-strip .num {
+    font-family: "Clash Display", sans-serif;
+    font-size: 56px;
+    font-weight: 600;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+  }
+  .results-strip .lbl {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft);
+  }
+
+  /* Next project */
+  .next-proj {
+    padding: 120px 0;
+    border-top: 1px solid var(--hair);
+  }
+  .next-proj .head {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-soft);
+    margin-bottom: 16px;
+  }
+  .next-proj a {
+    text-decoration: none;
+    color: var(--ink);
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 60px;
+    align-items: end;
+    padding: 60px 0;
+    border-top: 1px solid var(--hair);
+    transition: padding 0.3s ease;
+  }
+  .next-proj a:hover { padding-left: 20px; }
+  .next-proj h3 {
+    font-family: "Clash Display", sans-serif;
+    font-size: clamp(48px, 8vw, 120px);
+    font-weight: 600;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    margin: 0;
+    transition: color 0.3s ease;
+  }
+  .next-proj a:hover h3 { color: var(--red); }
+  .next-proj h3 em { font-style: italic; color: var(--red); }
+  .next-proj .next-thumb {
+    aspect-ratio: 4 / 3;
+    background: #0e0e0e;
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+  }
+  .next-proj .next-thumb::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 14px);
+  }
+  .next-proj .next-thumb .play {
+    position: absolute; top: 50%; left: 50%;
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: var(--red);
+    display: flex; align-items: center; justify-content: center;
+    transform: translate(-50%, -50%);
+  }
+  .next-proj .next-thumb .play svg { width: 18px; height: 18px; fill: #fff; margin-left: 3px; }
+  @media (max-width: 720px) { .next-proj a { grid-template-columns: 1fr; gap: 24px; } }
+</style>
+</head>
+<body>
+
+<div class="cursor"><span class="lbl">▶ Play</span></div>
+
+<nav class="nav">
+  <a class="nav-logo" href="index.html" data-wipe><span class="dot"></span> Shyam Vinayak Films</a>
+  <div class="nav-links">
+    <a href="index.html" data-wipe>Home</a>
+    <a href="services.html" data-wipe>Services</a>
+    <a href="work.html" class="active" data-wipe>Work</a>
+  </div>
+  <a href="mailto:vibhorsharma@shyamvinayakfilms.in" class="nav-cta" data-magnetic data-wipe>Let's talk →</a>
+  <button class="hamburger" aria-label="Menu"><span></span></button>
+</nav>
+
+<div class="mobile-menu">
+  <div class="mobile-menu-top">
+    <a class="nav-logo" href="index.html"><span class="dot"></span> Shyam Vinayak Films</a>
+    <button class="mobile-menu-close" aria-label="Close"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <ul class="mobile-menu-list" style="list-style:none;padding:0;">
+    <li><a href="index.html">Home <span class="num">01</span></a></li>
+    <li><a href="services.html">Services <span class="num">02</span></a></li>
+    <li><a href="work.html">Work <span class="num">03</span></a></li>
+    <li><a href="mailto:vibhorsharma@shyamvinayakfilms.in">Let's talk <span class="num">04</span></a></li>
+  </ul>
+</div>
+
+<a href="mailto:vibhorsharma@shyamvinayakfilms.in" class="float-cta" data-wipe><span class="pulse"></span> Let's talk</a>
+
+<main>
+
+<section class="container proj-hero" data-screen-label="Project hero">
+  <div class="proj-crumbs">
+    <a href="index.html" data-wipe>Home</a><span class="sep"></span>
+    <a href="work.html" data-wipe>Work</a><span class="sep"></span>
+    <span>The Long Drive Home</span>
+  </div>
+
+  <div class="proj-meta-bar">
+    <div>Client<strong>Mahindra Auto</strong></div>
+    <div>Project<strong>Thar Earth launch</strong></div>
+    <div>Year<strong>2025</strong></div>
+    <div>Format<strong>90s + 30s + Reel</strong></div>
+    <div>Location<strong>Ladakh · Mumbai</strong></div>
+  </div>
+
+  <h1 class="proj-title reveal">The Long Drive<br /><em>Home.</em></h1>
+
+  <div class="proj-summary">
+    <div>
+      <div class="tags">
+        <span class="sticker red">Brand Film</span>
+        <span class="sticker outline">90 seconds</span>
+        <span class="sticker outline">Ladakh shoot</span>
+        <span class="sticker yellow">Best Film · Kyoorius 2025</span>
+      </div>
+      <div class="eyebrow">Brief in one line</div>
+      <p style="margin-top: 12px;">Sell the new Thar without showing the spec sheet. Sell the feeling of going home, the long way.</p>
+    </div>
+    <div>
+      <p>A 90-second film for the Thar Earth launch, shot over <em>nine days</em> in Ladakh and one in a Mumbai garage. We wrote it as a father-and-son short, then stripped out every line that wasn't the engine, the road, or the wind. The cut that aired is the cut we showed in the very first edit review. Twice.</p>
+    </div>
+  </div>
+
+  <div class="player" data-open-player data-title="The Long Drive Home" data-client="Mahindra Auto" data-cursor="play">
+    <div class="rec"><span class="d"></span> ROLL 01 · TAKE 04</div>
+    <div class="tc" id="tcMain">00:00:00:14</div>
+    <div class="ring"></div>
+    <div class="play-big"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+    <div class="lbl">Tap to play · 01:32</div>
+    <div class="ratio">16:9 · Master · ProRes 422</div>
+  </div>
+  <div class="player-controls">
+    <button class="ctrl" aria-label="Play"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+    <span class="t">00:25</span>
+    <div class="scrub"><div class="scrub-fill"></div></div>
+    <span class="t">01:32</span>
+    <button class="ctrl" aria-label="Mute"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M3 9v6h4l5 4V5L7 9H3z"/></svg></button>
+    <button class="ctrl">HD</button>
+    <button class="ctrl" aria-label="CC">CC</button>
+    <button class="ctrl" aria-label="Fullscreen"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+  </div>
+</section>
+
+<section class="container">
+  <div class="proj-cols">
+    <div>
+      <h2>The <em>idea.</em></h2>
+      <p>Mahindra came in with a launch brief: position the new electric-hybrid Thar as the SUV for the long-haul family driver. The deck had charts. We didn't open the charts.</p>
+      <p>Instead, we asked one question: <em>what's the longest drive you remember?</em> Everyone in the room had the same shape of answer: a father, a kid in the passenger seat, a route that took them home the slow way. That became the spine.</p>
+
+      <p class="lift">A car ad survives the next twelve months on one thing: whether somebody, somewhere, remembers what the road sounded like.</p>
+
+      <h2 style="margin-top: 60px;">The <em>shoot.</em></h2>
+      <p>Nine days in Ladakh in October. Khardung La, Nubra, Pangong, with two car rigs, a single-camera A-cam team and a drone op who'd shot the previous Mahindra reel. We carried no playback monitor for the wide shots. The director called every take from inside the car.</p>
+      <p>One unplanned moment, a sandstorm on Day 6 that grounded us at a dhaba for nine hours, became the closing scene of the film. The producer's coffee mug is in the corner of the frame. We left it in.</p>
+
+      <h2 style="margin-top: 60px;">The <em>cut.</em></h2>
+      <p>Two review rounds. The first cut went to the CMO and the agency together, in the same room. We took five minutes of notes and shipped the second cut with three frames removed. That was the master.</p>
+      <p>The 90-second hero ran across YouTube pre-roll, prime-time TV, and a single 60-foot wall projection at the launch event. A 30-second TVC, a 15-second skippable, and seven vertical reels came out of the same nine days of footage.</p>
+    </div>
+
+    <aside class="credits">
+      <h4>Credits</h4>
+      <ul>
+        <li><span>Director</span><span>Vibhor Sharma</span></li>
+        <li><span>Producer</span><span>Aanchal Kapoor</span></li>
+        <li><span>DOP</span><span>Karan Thapliyal</span></li>
+        <li><span>Editor</span><span>Ria Menon</span></li>
+        <li><span>Colourist</span><span>Yashwant Pillai</span></li>
+        <li><span>Sound Design</span><span>Soham Mukherjee</span></li>
+        <li><span>Music</span><span>The Local Train</span></li>
+        <li><span>Agency</span><span>In-house · Mahindra</span></li>
+      </ul>
+
+      <div class="deliv">
+        <h4>Delivered</h4>
+        <div>
+          <span class="chip">16:9 · 90s</span>
+          <span class="chip">16:9 · 30s</span>
+          <span class="chip">9:16 · 15s × 7</span>
+          <span class="chip">1:1 · 30s × 3</span>
+          <span class="chip">Hindi · EN · TA · TE</span>
+          <span class="chip">Stills · 32 hero frames</span>
+          <span class="chip">BTS · 4 min</span>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Results -->
+  <div class="results-strip">
+    <div class="stat">
+      <div class="num"><span style="color:var(--red);">+</span>42<span style="font-size: 36px;">M</span></div>
+      <div class="lbl">YouTube views · 8 weeks</div>
+    </div>
+    <div class="stat">
+      <div class="num">93<span style="font-size: 36px;">%</span></div>
+      <div class="lbl">View-through · skippable</div>
+    </div>
+    <div class="stat">
+      <div class="num"><span style="color:var(--red);">+</span>18<span style="font-size: 36px;">%</span></div>
+      <div class="lbl">Brand recall · TG 25 to 44</div>
+    </div>
+    <div class="stat">
+      <div class="num">1<span style="font-size: 36px;">×</span></div>
+      <div class="lbl">Kyoorius Gold · Film Craft</div>
+    </div>
+  </div>
+</section>
+
+<!-- BTS -->
+<section class="bts" data-screen-label="Behind the scenes">
+  <div class="container">
+    <div class="bts-head">
+      <h2>From the <em>set.</em></h2>
+      <div class="eyebrow">Behind the scenes · 14 stills</div>
+    </div>
+    <div class="bts-grid">
+      <div class="b b1"><span class="num">/ 01</span><span class="stamp">Day 04 · Khardung La</span></div>
+      <div class="b"><span class="num">/ 02</span><span class="stamp">Day 06 · Sandstorm</span></div>
+      <div class="b"><span class="num">/ 03</span><span class="stamp">Day 02 · Pangong</span></div>
+      <div class="b"><span class="num">/ 04</span><span class="stamp">Day 01 · Recce</span></div>
+      <div class="b"><span class="num">/ 05</span><span class="stamp">Day 09 · Wrap</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Next -->
+<section class="container next-proj" data-screen-label="Next project">
+  <div class="head">Up next · 02 of 24</div>
+  <a href="project.html" data-wipe>
+    <h3>Engineered<br /><em>to Last.</em></h3>
+    <div class="next-thumb">
+      <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+    </div>
+  </a>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <p class="signoff">That's a <span class="red">wrap.</span><br /><em>See you on set.</em></p>
+        <p style="color: rgba(255,255,255,0.5); max-width: 360px; margin: 0;">Shyam Vinayak Films · Andheri West, Mumbai · 400053</p>
+      </div>
+      <div><h4>Pages</h4><ul>
+        <li><a href="index.html" data-wipe>Home</a></li>
+        <li><a href="services.html" data-wipe>Services</a></li>
+        <li><a href="work.html" data-wipe>Work</a></li>
+        <li><a href="mailto:vibhorsharma@shyamvinayakfilms.in" data-wipe>Let's talk</a></li>
+      </ul></div>
+      <div><h4>Contact</h4><ul>
+        <li><a href="mailto:vibhorsharma@shyamvinayakfilms.in">vibhorsharma@shyamvinayakfilms.in</a></li>
+        <li><a href="tel:+919999999999">+91 99 9999 9999</a></li>
+        <li><a href="https://wa.me/919999999999">WhatsApp</a></li>
+      </ul></div>
+      <div><h4>Elsewhere</h4><ul>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Vimeo</a></li>
+        <li><a href="#">YouTube</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 BHALCHANDRA CINEMATIC PRIVATE LIMITED</span>
+      <span>That's a wrap. Made in Mumbai.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+<script>
+  // — Timecode ticker —
+  (function () {
+    const el = document.getElementById("tcMain");
+    if (!el) return;
+    let f = 14;
+    setInterval(() => {
+      f++;
+      const fr = f % 24;
+      const sec = Math.floor(f / 24) % 60;
+      const min = Math.floor(f / (24 * 60)) % 60;
+      const hr = Math.floor(f / (24 * 3600));
+      el.textContent = [hr, min, sec, fr].map(n => String(n).padStart(2, "0")).join(":");
+    }, 42);
+  })();
+
+  // Live scrub
+  (function () {
+    const fill = document.querySelector(".player-controls .scrub-fill");
+    let p = 28;
+    setInterval(() => {
+      p = (p + 0.1) % 100;
+      fill.style.width = p + "%";
+    }, 80);
+  })();
+</script>
+</body>
+</html>

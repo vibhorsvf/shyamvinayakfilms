@@ -1,0 +1,103 @@
+/* Modal video player */
+.modal-player {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.modal-player.open { opacity: 1; }
+.mp-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10,10,10,0.92);
+  backdrop-filter: blur(8px);
+}
+.mp-close {
+  position: absolute;
+  top: 24px; right: 24px;
+  display: flex; align-items: center; gap: 10px;
+  background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 999px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  z-index: 2;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.mp-close:hover { background: var(--red); border-color: var(--red); }
+.mp-stage {
+  position: relative;
+  width: min(92vw, 1200px);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.mp-poster {
+  aspect-ratio: 16 / 9;
+  background: #0e0e0e;
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.mp-poster::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 14px);
+}
+.mp-tape {
+  position: absolute; top: 16px; left: 16px;
+  color: var(--red);
+  font-size: 11px; letter-spacing: 0.14em;
+}
+.mp-overlay-meta {
+  position: absolute; bottom: 16px; right: 16px;
+  color: rgba(255,255,255,0.55);
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+}
+.mp-center { text-align: center; color: #fff; z-index: 2; }
+.mp-play {
+  width: 86px; height: 86px; border-radius: 50%;
+  background: var(--red);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 18px;
+  cursor: pointer;
+  animation: pulse 2.4s infinite;
+}
+.mp-loading {
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
+.mp-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #fff;
+  padding: 14px 18px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 999px;
+}
+.mp-ctrl {
+  background: transparent; border: none; color: rgba(255,255,255,0.85);
+  cursor: pointer;
+  padding: 6px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.1em;
+}
+.mp-ctrl:hover { color: var(--yellow); }
+.mp-time { font-size: 11px; color: rgba(255,255,255,0.6); }
+.mp-scrub { flex: 1; height: 3px; background: rgba(255,255,255,0.15); border-radius: 2px; position: relative; }
+.mp-scrub-fill { position: absolute; left: 0; top: 0; bottom: 0; background: var(--red); border-radius: 2px; }
+@media (max-width: 720px) {
+  .mp-controls { flex-wrap: wrap; }
+  .mp-close { top: 16px; right: 16px; }
+}
