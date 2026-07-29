@@ -56,16 +56,23 @@
     var burger = $('#navBurger'), sheet = $('#navMobile');
     if (!burger || !sheet) return;
     var workToggle = sheet.querySelector('.nm-toggle');
+    var workPanel = workToggle ? workToggle.nextElementSibling : null;
+    function collapseWork() {
+      if (!workToggle) return;
+      workToggle.setAttribute('aria-expanded', 'false');
+      if (workPanel) workPanel.style.maxHeight = '0px';
+    }
     function set(open) {
       document.body.classList.toggle('nav-open', open);
       burger.setAttribute('aria-expanded', open ? 'true' : 'false');
       sheet.setAttribute('aria-hidden', open ? 'false' : 'true');
-      if (!open && workToggle) workToggle.setAttribute('aria-expanded', 'false'); // collapse the Work submenu when closing
+      if (!open) collapseWork(); // collapse the Work submenu when closing
       try { if (window.__lenis) { open ? window.__lenis.stop() : window.__lenis.start(); } } catch (e) {}
     }
     burger.addEventListener('click', function () { set(!document.body.classList.contains('nav-open')); });
     if (workToggle) workToggle.addEventListener('click', function () {
-      workToggle.setAttribute('aria-expanded', workToggle.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
+      if (workToggle.getAttribute('aria-expanded') === 'true') { collapseWork(); }
+      else { workToggle.setAttribute('aria-expanded', 'true'); if (workPanel) workPanel.style.maxHeight = workPanel.scrollHeight + 'px'; }
     });
     $$('a', sheet).forEach(function (a) { a.addEventListener('click', function () { set(false); }); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && document.body.classList.contains('nav-open')) set(false); });
