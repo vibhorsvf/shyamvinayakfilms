@@ -612,12 +612,13 @@
     function setAvatar(slide) {
       if (!avatarBox || !avatarImg) return;
       var src = slide && slide.getAttribute('data-avatar');
+      avatarBox.classList.remove('has-img');   // hide old photo until the new one is ready (placeholder shows meanwhile)
       if (src) {
-        avatarImg.onload = function () { avatarBox.classList.add('has-img'); };
-        avatarImg.onerror = function () { avatarBox.classList.remove('has-img'); avatarImg.removeAttribute('src'); };
-        avatarImg.src = src;                 // real photo when present; falls back to the placeholder icon if missing
+        // guard against stale load events from quickly-changed sources: only the current src toggles the photo
+        avatarImg.onload = function () { if (avatarImg.getAttribute('src') === src) avatarBox.classList.add('has-img'); };
+        avatarImg.onerror = null;
+        avatarImg.setAttribute('src', src);    // real photo when present; falls back to the placeholder icon if missing
       } else {
-        avatarBox.classList.remove('has-img');
         avatarImg.removeAttribute('src');
       }
     }
