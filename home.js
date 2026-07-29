@@ -607,11 +607,26 @@
     var counter = $('#qCounter');
     var prev = $('#qPrev');
     var next = $('#qNext');
+    var avatarBox = $('.q-avatar');
+    var avatarImg = avatarBox ? avatarBox.querySelector('.q-avatar-img') : null;
+    function setAvatar(slide) {
+      if (!avatarBox || !avatarImg) return;
+      var src = slide && slide.getAttribute('data-avatar');
+      if (src) {
+        avatarImg.onload = function () { avatarBox.classList.add('has-img'); };
+        avatarImg.onerror = function () { avatarBox.classList.remove('has-img'); avatarImg.removeAttribute('src'); };
+        avatarImg.src = src;                 // real photo when present; falls back to the placeholder icon if missing
+      } else {
+        avatarBox.classList.remove('has-img');
+        avatarImg.removeAttribute('src');
+      }
+    }
     var i = 0;
     function show(n) {
       i = (n + slides.length) % slides.length;
       slides.forEach(function (s, k) { s.classList.toggle('is-active', k === i); });
       if (counter) counter.textContent = pad2(i + 1) + ' / ' + pad2(slides.length);
+      setAvatar(slides[i]);
     }
     if (prev) prev.addEventListener('click', function () { show(i - 1); });
     if (next) next.addEventListener('click', function () { show(i + 1); });
