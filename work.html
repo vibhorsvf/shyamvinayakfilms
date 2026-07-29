@@ -424,8 +424,9 @@
       var mnext=document.createElement('button');mnext.type='button';mnext.className='pc-mnav pc-mnext';mnext.setAttribute('aria-label','More photos');mnext.innerHTML='›';
       block.appendChild(mprev);block.appendChild(mnext);
       var mpage=function(){return Math.max(mcol.clientWidth*0.62,120);};
-      mnext.addEventListener('click',function(e){e.stopPropagation();mcol.scrollBy({left:mpage(),behavior:'smooth'});});
-      mprev.addEventListener('click',function(e){e.stopPropagation();mcol.scrollBy({left:-mpage(),behavior:'smooth'});});
+      var mslide=function(delta){var start=mcol.scrollLeft,target=Math.max(0,Math.min(mcol.scrollWidth-mcol.clientWidth,start+delta)),t0=performance.now(),dur=380;(function step(now){var p=Math.min(1,(now-t0)/dur);var e=p<0.5?2*p*p:1-Math.pow(-2*p+2,2)/2;mcol.scrollLeft=start+(target-start)*e;if(p<1)requestAnimationFrame(step);})(performance.now());};
+      mnext.addEventListener('click',function(e){e.stopPropagation();mslide(mpage());});
+      mprev.addEventListener('click',function(e){e.stopPropagation();mslide(-mpage());});
     }
   });
 })();
