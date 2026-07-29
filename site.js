@@ -301,3 +301,75 @@
     if (e.key === 'Escape' && lb.classList.contains('open')) close();
   });
 })();
+
+/* ============================================================
+   SVF — print photo lightbox (tap a print still to view full-screen)
+   Reuses the .pz / .pz-* styles already in the stylesheet.
+   ============================================================ */
+(function () {
+  'use strict';
+  var blocks = Array.prototype.slice.call(document.querySelectorAll('.pr-block'));
+  if (!blocks.length) return;
+
+  var pz = document.createElement('div');
+  pz.className = 'pz';
+  pz.setAttribute('role', 'dialog');
+  pz.setAttribute('aria-modal', 'true');
+  pz.innerHTML =
+    '<div class="pz-back" data-pz-close></div>' +
+    '<button class="pz-close" type="button" aria-label="Close" data-pz-close>✕</button>' +
+    '<button class="pz-nav pz-prev" type="button" aria-label="Previous photo">‹</button>' +
+    '<img class="pz-img" alt="" />' +
+    '<button class="pz-nav pz-next" type="button" aria-label="Next photo">›</button>' +
+    '<div class="pz-count"></div>';
+  document.body.appendChild(pz);
+
+  var pzImg = pz.querySelector('.pz-img');
+  var pzCount = pz.querySelector('.pz-count');
+  var list = [], idx = 0;
+
+  function render() {
+    pzImg.setAttribute('src', list[idx]);
+    pzCount.textContent = (idx + 1) + ' / ' + list.length;
+    pz.classList.toggle('pz-multi', list.length > 1);
+  }
+  function openAt(imgs, i) {
+    list = imgs; idx = i < 0 ? 0 : i;
+    render();
+    pz.classList.add('open');
+    document.documentElement.style.overflow = 'hidden';
+  }
+  function close() {
+    pz.classList.remove('open');
+    document.documentElement.style.overflow = '';
+  }
+  function step(d) { if (list.length) { idx = (idx + d + list.length) % list.length; render(); } }
+
+  blocks.forEach(function (block) {
+    var all = (block.getAttribute('data-all') || '').split(',')
+      .map(function (s) { return s.trim(); }).filter(Boolean);
+    var cells = Array.prototype.slice.call(block.querySelectorAll('.pc-cell'));
+    cells.forEach(function (cell) {
+      cell.addEventListener('click', function () {
+        var im = cell.querySelector('img');
+        var src = im ? im.getAttribute('src') : null;
+        var imgs = all.length ? all : cells.map(function (c) {
+          var i2 = c.querySelector('img'); return i2 ? i2.getAttribute('src') : null;
+        }).filter(Boolean);
+        openAt(imgs, imgs.indexOf(src));
+      });
+    });
+  });
+
+  Array.prototype.forEach.call(pz.querySelectorAll('[data-pz-close]'), function (b) {
+    b.addEventListener('click', close);
+  });
+  pz.querySelector('.pz-prev').addEventListener('click', function () { step(-1); });
+  pz.querySelector('.pz-next').addEventListener('click', function () { step(1); });
+  document.addEventListener('keydown', function (e) {
+    if (!pz.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  });
+})();
