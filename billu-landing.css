@@ -113,7 +113,7 @@ html.billu-lock, html.billu-lock body { overflow: hidden !important; height: 100
   }
   /* bubble floats just above Billu's head (head top ≈ 46vh), tail pointing down at him */
   .billu-bubble {
-    left: 50%; right: auto; top: auto; bottom: 50vh;
+    left: 50%; right: auto; top: auto; bottom: 46vh;
     transform: translateX(-50%);
     width: min(70vw, 290px); max-width: none;
     padding: 11px 14px 10px; font-size: 13px; line-height: 1.4;
