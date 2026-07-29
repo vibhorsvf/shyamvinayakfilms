@@ -85,7 +85,7 @@
   /* ---------- conversation flow ---------- */
   var MSG = [
     "Hey hooman, I\u2019m Billu, CMO (Chief Meowing Officer) of Shyam Vinayak Films.",
-    "Come in, hooman! Let me show you what my hoomans have been building."
+    "Come in! Let me show you what my hoomans have been building."
   ];
   var step = 0; /* 0 pre · 1 msg1 · 2 msg2 · 3 entering */
 
