@@ -65,7 +65,7 @@
      We set src directly on the <video> (overrides the child <source>) and force a
      reload, so the correct clip is guaranteed regardless of the markup default. ---- */
   var isPhone = window.matchMedia('(max-width: 900px), (orientation: portrait), (pointer: coarse)').matches;
-  var PHONE_CLIP = 'uploads/billu-mobile.mp4';
+  var PHONE_CLIP = 'uploads/billu-mobile.mp4?v=2';
   var LAPTOP_CLIP = 'uploads/billu-desktop.mp4';
   var wantSrc = isPhone ? PHONE_CLIP : LAPTOP_CLIP;
   var msrc = vid.querySelector('source');

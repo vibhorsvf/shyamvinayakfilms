@@ -2084,6 +2084,15 @@
 .pr-collage .pc-cell img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover}
 .pr-collage .pc-nav{display:none!important}
 }
+/* mobile collage slide arrows (hidden on desktop) */
+.pc-mnav{display:none}
+@media(max-width:640px){
+.pr-block{position:relative}
+.pc-mnav{display:flex;align-items:center;justify-content:center;position:absolute;bottom:calc(31vw - 22px);z-index:6;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.55);background:rgba(18,14,14,.5);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:#fff;font-size:26px;line-height:1;cursor:pointer;padding:0}
+.pc-mnav:active{background:var(--red);border-color:var(--red)}
+.pc-mprev{left:6px}
+.pc-mnext{right:6px}
+}
 .bc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(26px,3.6vh,48px) clamp(14px,1.8vw,30px);align-items:start;max-width:1120px;margin:0 auto}
 .bc-item{display:flex;flex-direction:column}
 .bc-item .wg-media{aspect-ratio:16/9;width:100%}
