@@ -55,13 +55,18 @@
   (function () {
     var burger = $('#navBurger'), sheet = $('#navMobile');
     if (!burger || !sheet) return;
+    var workToggle = sheet.querySelector('.nm-toggle');
     function set(open) {
       document.body.classList.toggle('nav-open', open);
       burger.setAttribute('aria-expanded', open ? 'true' : 'false');
       sheet.setAttribute('aria-hidden', open ? 'false' : 'true');
+      if (!open && workToggle) workToggle.setAttribute('aria-expanded', 'false'); // collapse the Work submenu when closing
       try { if (window.__lenis) { open ? window.__lenis.stop() : window.__lenis.start(); } } catch (e) {}
     }
     burger.addEventListener('click', function () { set(!document.body.classList.contains('nav-open')); });
+    if (workToggle) workToggle.addEventListener('click', function () {
+      workToggle.setAttribute('aria-expanded', workToggle.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
+    });
     $$('a', sheet).forEach(function (a) { a.addEventListener('click', function () { set(false); }); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && document.body.classList.contains('nav-open')) set(false); });
     window.addEventListener('resize', function () { if (window.innerWidth > 760 && document.body.classList.contains('nav-open')) set(false); });
