@@ -12,7 +12,7 @@
       "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
     },
     {
-      "source": "/(client-logos|work-print|dummy|testimonials|about)/(.*)",
+      "source": "/(client-logos|work-print|dummy|testimonials|about|favicons)/(.*)",
       "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
     }
   ]
